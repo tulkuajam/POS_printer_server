@@ -14,6 +14,7 @@ const server = http.createServer((req, res) => {
   }
 
    if (req.url === '/') { // Handle root URL
+     console.log({ message: 'Thermal printer server is running' })
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ message: 'Thermal printer server is running' }));
     return;
