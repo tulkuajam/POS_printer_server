@@ -70,7 +70,7 @@ const server = http.createServer((req, res) => {
 
 const port = 3000; // Choose a port for your server
 server.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server2 listening on port ${port}`);
 });
 /*
 fetch('http://your_server_ip:3000/print', {
