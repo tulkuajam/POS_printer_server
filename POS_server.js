@@ -13,6 +13,12 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+   if (req.url === '/') { // Handle root URL
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: 'Thermal printer server is running' }));
+    return;
+  }
+
   if (req.method === 'POST' && req.url === '/print') {
     let body = '';
     req.on('data', (chunk) => {
