@@ -2,7 +2,7 @@ const net = require('net');
 
 // Example usage of the net module
 const client = net.createConnection({ port: 9100, host: '192.168.1.88' }, () => {
-    console.log('connected to server!');
+    console.log('connected to server2!');
     client.write('world!\r\n');
 });
 
