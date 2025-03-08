@@ -17,11 +17,13 @@ const server = http.createServer((req, res) => {
     let body = '';
     req.on('data', (chunk) => {
       body += chunk;
+      console.log(body)
     });
 
     req.on('end', () => {
       try {
         const dataToPrint = JSON.parse(body).text; // Assuming JSON with 'text' field
+        console.log(dataToPrint)
         if (!dataToPrint) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ error: 'Missing text data' }));
