@@ -3,8 +3,8 @@ const fs = require('fs'); // For reading certificate files
 const net = require('net');
 
 // Read SSL certificate and private key
-const privateKey = fs.readFileSync('./../key.pem', 'utf8'); // Replace with your key file
-const certificate = fs.readFileSync('./../cert.pem', 'utf8'); // Replace with your cert file
+const privateKey = fs.readFileSync('~/key.pem', 'utf8'); // Replace with your key file
+const certificate = fs.readFileSync('~/cert.pem', 'utf8'); // Replace with your cert file
 
 const credentials = {
   key: privateKey,
