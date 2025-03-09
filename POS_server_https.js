@@ -74,6 +74,11 @@ const server = https.createServer(credentials, (req, res) => {
 });
 
 const port = 443; // Standard HTTPS port
-server.listen(port, () => {
-  console.log(`HTTPS server listening on port ${port}`);
+server.listen(port, '192.168.177.132',() => {
+  console.log(`HTTPS server listening on https://192.168.177.132:${port}`);
 });
+
+// const port = 3000;
+// server.listen(port, '192.168.177.132', () => {
+//   console.log(`HTTPS server listening on https://192.168.177.132:${port}`);
+// });
