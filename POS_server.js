@@ -82,7 +82,7 @@ const ip   = '10.241.103.162' //thubten nyima
 server.listen(port, 
   // ip, 
   () => {
-  console.log(`HTTP server listening on ${ip}:${port}`);
+  console.log(`HTTP server listening on http://${ip}:${port}`);
 });
 /*
 fetch('http://your_server_ip:3000/print', {
