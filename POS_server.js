@@ -75,10 +75,9 @@ const server = http.createServer((req, res) => {
 // });
 
 const port = 3000; // Standard HTTPS port
-server.listen(port, 
-  // '192.168.177.132',
-  () => {
-  console.log(`HTTP server listening on http://192.168.177.132:${port}`);
+const ip   = '192.168.177.149'
+server.listen(port, ip, () => {
+  console.log(`HTTP server listening on ${ip}:${port}`);
 });
 /*
 fetch('http://your_server_ip:3000/print', {
