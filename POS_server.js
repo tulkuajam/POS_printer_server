@@ -30,6 +30,7 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const dataToPrint = body; //JSON.parse(body).text; // Assuming JSON with 'text' field
+        console.log(body)
         console.log('on end',dataToPrint)
         if (!dataToPrint) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
