@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-   if (req.url === '/') { // Handle root URL
+  if (req.url === '/') { // Handle root URL
      console.log({ message: 'Thermal printer server is running' })
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ message: 'Thermal printer server is running' }));
@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
 
     req.on('end', () => {
       try {
-        const dataToPrint = JSON.parse(body).text; // Assuming JSON with 'text' field
+        const dataToPrint = body; //JSON.parse(body).text; // Assuming JSON with 'text' field
         console.log('on end',dataToPrint)
         if (!dataToPrint) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
