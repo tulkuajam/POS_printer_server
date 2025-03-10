@@ -82,7 +82,7 @@ const port = 3000; // Standard HTTPS port
 server.listen(port, 
   // ip, 
   () => {
-  console.log(`HTTP server listening on http://${ip}:${port}`);
+  console.log(`HTTP server listening on http://${ip||''}:${port}`);
 });
 /*
 fetch('http://your_server_ip:3000/print', {
