@@ -75,7 +75,8 @@ const server = http.createServer((req, res) => {
 // });
 
 const port = 3000; // Standard HTTPS port
-const ip   = '192.168.177.149'
+// const ip   = '192.168.177.149'
+const ip   = '192.168.1.70'
 server.listen(port, ip, () => {
   console.log(`HTTP server listening on ${ip}:${port}`);
 });
