@@ -9,6 +9,9 @@ const Jimp = require("jimp");
 
 const fs = require('fs').promises;
 
+const fetch = require('node-fetch')
+console.log(fetch)
+
 const server = http.createServer(async (req, res) => {
   // console.log(res)
   // Enable CORS
@@ -59,7 +62,7 @@ const server = http.createServer(async (req, res) => {
 
         // await printer.printImage('./POS_printer_server/image2.png');
         // await printer.execute();
-        console.log(Jimp.Jimp.read)
+        console.log(fetch)
         // const image = await Jimp.read('./POS_printer_server/image2.png');
         const imageBuffer = await fs.readFile('./POS_printer_server/image2.png');
         const image = await Jimp.Jimp.read(imageBuffer);
