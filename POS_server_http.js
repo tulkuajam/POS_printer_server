@@ -9,8 +9,8 @@ const Jimp = require("jimp");
 
 const fs = require('fs').promises;
 
-const fetch = require('fetch')
-console.log(fetch)
+// const fetch = require('fetch')
+// console.log(fetch)
 
 const server = http.createServer(async (req, res) => {
   // console.log(res)
@@ -62,18 +62,19 @@ const server = http.createServer(async (req, res) => {
 
         // await printer.printImage('./POS_printer_server/image2.png');
         // await printer.execute();
-        console.log(fetch)
-        // const image = await Jimp.read('./POS_printer_server/image2.png');
-        const imageBuffer = await fs.readFile('./POS_printer_server/image2.png');
-        const image = await Jimp.Jimp.read(imageBuffer);
 
-        // Optional: Resize the image to fit the printer's width
-        const printerWidth = 576; // Example: 576 dots for 72mm width. Adjust as needed.
-        image.resize(printerWidth, Jimp.AUTO);
-        // Optional: Convert to grayscale or black and white for better thermal printing
-        image.grayscale(); // or image.threshold(128);
-        await printer.printImage(image.bitmap.data);
-        await printer.execute();
+
+        // // const image = await Jimp.read('./POS_printer_server/image2.png');
+        // const imageBuffer = await fs.readFile('./POS_printer_server/image2.png');
+        // const image = await Jimp.Jimp.read(imageBuffer);
+
+        // // Optional: Resize the image to fit the printer's width
+        // const printerWidth = 576; // Example: 576 dots for 72mm width. Adjust as needed.
+        // image.resize(printerWidth, Jimp.AUTO);
+        // // Optional: Convert to grayscale or black and white for better thermal printing
+        // image.grayscale(); // or image.threshold(128);
+        // await printer.printImage(image.bitmap.data);
+        // await printer.execute();
 
         // // Load the image using Sharp
         // const imageBuffer = await fs.readFile(imagePath);
@@ -100,6 +101,9 @@ const server = http.createServer(async (req, res) => {
         // await printer.printImage(bitmap, imageWidth);
         // await printer.cut();
         // await printer.execute();
+
+        await printer.printImage('./POS_printer_server/image3.png');  // Print PNG image
+        await printer.execute();
 
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Printed successfully');
