@@ -58,8 +58,10 @@ const server = http.createServer(async (req, res) => {
 
         // await printer.printImage('./POS_printer_server/image2.png');
         // await printer.execute();
-        console.log(Jimp)
-        const image = await Jimp.read('./POS_printer_server/image2.png');
+        console.log(Jimp.default)
+        // const image = await Jimp.read('./POS_printer_server/image2.png');
+        const image = await Jimp.default.read('./POS_printer_server/image2.png');
+
         // Optional: Resize the image to fit the printer's width
         const printerWidth = 576; // Example: 576 dots for 72mm width. Adjust as needed.
         image.resize(printerWidth, Jimp.AUTO);
