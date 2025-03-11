@@ -3,6 +3,7 @@ const ThermalPrinter = require('node-thermal-printer').printer;
 const PrinterTypes = require('node-thermal-printer').types;
 
 const server = http.createServer(async (req, res) => {
+    console.log(res)
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your origin
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
