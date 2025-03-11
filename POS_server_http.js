@@ -9,7 +9,7 @@ const Jimp = require("jimp");
 
 const fs = require('fs').promises;
 
-const fetch = require('node-fetch')
+const fetch = require('fetch')
 console.log(fetch)
 
 const server = http.createServer(async (req, res) => {
