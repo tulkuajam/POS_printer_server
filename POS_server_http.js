@@ -46,9 +46,10 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        printer.alignCenter();
-        printer.println(message);
-        printer.cut();
+        // printer.alignCenter();
+        // printer.println(message);
+        // printer.cut();
+        await printer.printImage('./image.jpg');
 
         await printer.execute();
         res.writeHead(200, { 'Content-Type': 'text/plain' });
