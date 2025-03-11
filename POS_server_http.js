@@ -2,7 +2,7 @@ const http = require('http');
 const ThermalPrinter = require('node-thermal-printer').printer;
 const PrinterTypes = require('node-thermal-printer').types;
 
-const Jimp = require("jimp");
+// const Jimp = require("jimp");
 
 // const sharp = require("sharp");
 // const fs = require("fs").promises; // Use promises for async file operations
