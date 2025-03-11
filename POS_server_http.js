@@ -49,7 +49,7 @@ const server = http.createServer(async (req, res) => {
         // printer.alignCenter();
         // printer.println(message);
         // printer.cut();
-        await printer.printImage('./POS_printer_server/image.png');
+        await printer.printImage('./POS_printer_server/image2.png');
 
         await printer.execute();
         res.writeHead(200, { 'Content-Type': 'text/plain' });
