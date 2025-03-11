@@ -7,6 +7,7 @@ const Jimp = require("jimp");
 // const sharp = require("sharp");
 // const fs = require("fs").promises; // Use promises for async file operations
 
+const fs = require('fs').promises;
 
 const server = http.createServer(async (req, res) => {
   // console.log(res)
@@ -60,7 +61,8 @@ const server = http.createServer(async (req, res) => {
         // await printer.execute();
         console.log(Jimp.Jimp.read)
         // const image = await Jimp.read('./POS_printer_server/image2.png');
-        const image = await Jimp.Jimp.read('https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg');
+        const imageBuffer = await fs.readFile('./POS_printer_server/image2.png');
+        const image = await Jimp.Jimp.read(imageBuffer);
 
         // Optional: Resize the image to fit the printer's width
         const printerWidth = 576; // Example: 576 dots for 72mm width. Adjust as needed.
