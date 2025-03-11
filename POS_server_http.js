@@ -9,6 +9,7 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'POST' && req.url === '/print') {
+    console.log('/print')
     let body = '';
     req.on('data', (chunk) => {
       body += chunk;
@@ -18,6 +19,7 @@ const server = http.createServer(async (req, res) => {
       try {
         const data = JSON.parse(body);
         const message = data.message;
+        console.log(data,message)
 
         let printer = new ThermalPrinter({
           type: PrinterTypes.EPSON,
