@@ -49,9 +49,20 @@ const server = http.createServer(async (req, res) => {
         // printer.alignCenter();
         // printer.println(message);
         // printer.cut();
-        await printer.printImage('./POS_printer_server/image2.png');
 
-        await printer.execute();
+        // await printer.printImage('./POS_printer_server/image2.png');
+        // await printer.execute();
+
+        const image = await Jimp.read('./POS_printer_server/image2.png');
+        // Optional: Resize the image to fit the printer's width
+        const printerWidth = 576; // Example: 576 dots for 72mm width. Adjust as needed.
+        image.resize(printerWidth, Jimp.AUTO);
+
+        // Optional: Convert to grayscale or black and white for better thermal printing
+        image.grayscale(); // or image.threshold(128);
+
+        await printer.printImage(image.bitmap.data);
+
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Printed successfully');
       } catch (error) {
