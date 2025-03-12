@@ -51,8 +51,8 @@ const server = net.createServer((socket) => {
     });
 });
 
-server.listen(PRINTER_PORT + 1, () => { //Listen on a different port than the printer itself.
-    console.log(`Server listening on port ${PRINTER_PORT + 1}`);
+server.listen(PRINTER_PORT, () => { //Listen on a different port than the printer itself.
+    console.log(`Server listening on port ${PRINTER_PORT}`);
 });
 
 server.on('error', (err) => {
