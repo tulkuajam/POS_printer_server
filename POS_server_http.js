@@ -41,25 +41,25 @@ const server = http.createServer(async (req, res) => {
       try {
         const data = JSON.parse(body);
         const message = data.message;
-        console.log(data,message)
+        const imagePath=data.imagePath;
+        console.log(message,imagePath)
 
-        let printer = new ThermalPrinter({
-          type: PrinterTypes.EPSON,
-          interface: 'tcp://192.168.177.128:9100',
-          characterSet: 'SLOVENIA',
-          removeSpecialCharacters: false,
-          lineCharacter: '=',
-          options: {
-            timeout: 5000,
-          },
-        });
-
-        const isConnected = await printer.isPrinterConnected();
-        if (!isConnected) {
-          res.writeHead(500, { 'Content-Type': 'text/plain' });
-          res.end('Printer not connected.');
-          return;
-        }
+        // let printer = new ThermalPrinter({
+        //   type: PrinterTypes.EPSON,
+        //   interface: 'tcp://192.168.177.128:9100',
+        //   characterSet: 'SLOVENIA',
+        //   removeSpecialCharacters: false,
+        //   lineCharacter: '=',
+        //   options: {
+        //     timeout: 5000,
+        //   },
+        // });
+        // const isConnected = await printer.isPrinterConnected();
+        // if (!isConnected) {
+        //   res.writeHead(500, { 'Content-Type': 'text/plain' });
+        //   res.end('Printer not connected.');
+        //   return;
+        // }
 
         // printer.alignCenter();
         // printer.println(message);
@@ -112,7 +112,12 @@ const server = http.createServer(async (req, res) => {
 
         try {
           // Replace with your printer's IP address and image path
-          await printImageToNetworkPrinter('192.168.177.128', 9100, './POS_printer_server/image3.png');
+          await printImageToNetworkPrinter(
+            '192.168.177.128', 
+            9100, 
+            // './POS_printer_server/image3.png',
+            imagePath
+          );
           console.log('Print job submitted successfully');
         } catch (error) {
           console.error('Failed to print:', error);
@@ -145,7 +150,7 @@ server.listen(port, () => {
  * @param {string} density - Image density (s8, d8, s24, d24)
  * @returns {Promise} - Resolves when printing is complete
  */
-function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24') {
+function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24') { console.log(printerIP,port,imagePath,density)
   return new Promise((resolve, reject) => {
     try {
       // Create network device
