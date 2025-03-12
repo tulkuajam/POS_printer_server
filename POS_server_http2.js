@@ -1,5 +1,6 @@
 const net = require('net');
 const escpos = require('escpos');
+escpos.Network = require('escpos-network');
 
 const PRINTER_IP = '192.168.1.70'; // Replace with your printer's IP
 const PRINTER_PORT = 9100; // Replace with your printer's port
