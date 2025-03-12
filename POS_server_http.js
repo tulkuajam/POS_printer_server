@@ -44,6 +44,8 @@ const server = http.createServer(async (req, res) => {
         const imagePath=data.imagePath;
         console.log(message,imagePath)
 
+        let printerIP='192.168.1.70'
+        let PRINTER_PORT=9100
         const device = new escpos.Network(PRINTER_IP, PRINTER_PORT);
         const printer = new escpos.Printer(device);
 
