@@ -173,7 +173,7 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
 
         console.log('Connected to printer. Loading image...');
 
-        device.open(function(error){
+        // device.open(function(error){
           printer
           .font('a')
           .align('ct')
@@ -195,7 +195,7 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
             this.cut();
             this.close();
           });
-        });
+        // });
 
         
       //   try{
