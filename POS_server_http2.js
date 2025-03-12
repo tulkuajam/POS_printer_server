@@ -9,6 +9,7 @@ const server = net.createServer((socket) => {
 
     socket.on('data', (data) => {
         const textToPrint = data.toString('utf8').trim(); // Convert buffer to string
+        console.log(textToPrint)
 
         if (!textToPrint) {
             console.log('Received empty data.');
