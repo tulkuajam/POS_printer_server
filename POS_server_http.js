@@ -1,6 +1,6 @@
 const http = require('http');
-const ThermalPrinter = require('node-thermal-printer').printer;
-const PrinterTypes = require('node-thermal-printer').types;
+// const ThermalPrinter = require('node-thermal-printer').printer;
+// const PrinterTypes = require('node-thermal-printer').types;
 
 // const Jimp = require("jimp");
 
