@@ -12,11 +12,6 @@ const fs = require('fs').promises;
 // const fetch = require('fetch')
 // console.log(fetch)
 
-const escpos = require('escpos');
-// Install network adapter
-escpos.Network = require('escpos-network');
-
-
 const server = http.createServer(async (req, res) => {
   // console.log(res)
   // Enable CORS
@@ -41,25 +36,25 @@ const server = http.createServer(async (req, res) => {
       try {
         const data = JSON.parse(body);
         const message = data.message;
-        const imagePath=data.imagePath;
-        console.log(message,imagePath)
+        console.log(data,message)
 
-        // let printer = new ThermalPrinter({
-        //   type: PrinterTypes.EPSON,
-        //   interface: 'tcp://192.168.177.128:9100',
-        //   characterSet: 'SLOVENIA',
-        //   removeSpecialCharacters: false,
-        //   lineCharacter: '=',
-        //   options: {
-        //     timeout: 5000,
-        //   },
-        // });
-        // const isConnected = await printer.isPrinterConnected();
-        // if (!isConnected) {
-        //   res.writeHead(500, { 'Content-Type': 'text/plain' });
-        //   res.end('Printer not connected.');
-        //   return;
-        // }
+        let printer = new ThermalPrinter({
+          type: PrinterTypes.EPSON,
+          interface: 'tcp://192.168.177.127:9100',
+          characterSet: 'SLOVENIA',
+          removeSpecialCharacters: false,
+          lineCharacter: '=',
+          options: {
+            timeout: 5000,
+          },
+        });
+
+        const isConnected = await printer.isPrinterConnected();
+        if (!isConnected) {
+          res.writeHead(500, { 'Content-Type': 'text/plain' });
+          res.end('Printer not connected.');
+          return;
+        }
 
         // printer.alignCenter();
         // printer.println(message);
@@ -107,21 +102,8 @@ const server = http.createServer(async (req, res) => {
         // await printer.cut();
         // await printer.execute();
 
-        // await printer.printImage('./POS_printer_server/image3.png');  // Print PNG image
-        // await printer.execute();
-
-        try {
-          // Replace with your printer's IP address and image path
-          await printImageToNetworkPrinter(
-            '192.168.177.128', 
-            9100, 
-            // './POS_printer_server/image3.png',
-            imagePath
-          );
-          console.log('Print job submitted successfully');
-        } catch (error) {
-          console.error('Failed to print:', error);
-        }
+        await printer.printImage('./POS_printer_server/image3.png');  // Print PNG image
+        await printer.execute();
 
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Printed successfully');
@@ -141,72 +123,3 @@ const port = 3000;
 server.listen(port, () => {
   console.log(`Server listening on port http://localhost:${port}`);
 });
-
-/**
- * Function to print an image to a network ESC/POS printer
- * @param {string} printerIP - The IP address of the printer
- * @param {number} port - The port number (usually 9100)
- * @param {string} imagePath - Path to the PNG or JPG image
- * @param {string} density - Image density (s8, d8, s24, d24)
- * @returns {Promise} - Resolves when printing is complete
- */
-function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24') { console.log(printerIP,port,imagePath,density)
-  return new Promise((resolve, reject) => {
-    try {
-      // Create network device
-      const device = new escpos.Network(printerIP, port);
-      // Create printer interface
-      const printer = new escpos.Printer(device);
-
-      console.log(`Connecting to printer at ${printerIP}:${port}...`);
-      
-      // Open connection to the printer
-      device.open(function(err) {
-        if (err) {
-          console.error('Error opening connection to printer:', err);
-          return reject(err);
-        }
-
-        console.log('Connected to printer. Loading image...');
-        
-        try{
-        // Load the image (works with PNG or JPG)
-        escpos.Image.load(imagePath, function(image) {
-          console.log('Image loaded. Sending to printer...');
-          
-          printer
-            .align('ct')         // Center align the image
-            .image(image, density) // Print with specified density
-            .then(() => {
-              console.log('Image sent to printer. Finishing...');
-              
-              printer
-                .cut()           // Cut the paper
-                .close();        // Close the connection
-              
-              console.log('Print job completed successfully.');
-              resolve('Print completed');
-            })
-            .catch(error => {
-              console.error('Error printing image:', error);
-              printer.close();
-              reject(error);
-            });
-        })
-        // .catch(error => {
-        //   console.error('Error loading image:', error);
-        //   device.close();
-        //   reject(error);
-        // });
-      }catch(error){
-        console.error('Error loading image:', error);
-        device.close();
-        reject(error);
-      } 
-      });
-    } catch (error) {
-      console.error('Unexpected error:', error);
-      reject(error);
-    }
-  });
-}
