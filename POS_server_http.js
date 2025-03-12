@@ -159,8 +159,8 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
       // Create printer interface
       const printer = new escpos.Printer(device);
 
-      const networkDevice = new escpos.Network('localhost');
-      const networkScreen = new escpos.Screen(networkDevice);
+      // const networkDevice = new escpos.Network('localhost');
+      // const networkScreen = new escpos.Screen(networkDevice);
 
       console.log(`Connecting to printer at ${printerIP}:${port}...`);
       
