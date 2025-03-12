@@ -44,6 +44,30 @@ const server = http.createServer(async (req, res) => {
         const imagePath=data.imagePath;
         console.log(message,imagePath)
 
+        const device = new escpos.Network(PRINTER_IP, PRINTER_PORT);
+        const printer = new escpos.Printer(device);
+
+        device.open(error => {
+            if (error) {
+                console.error('Error opening printer:', error);
+                socket.end();
+                return;
+            }
+
+            printer
+                .font('a')
+                .align('ct')
+                .style('bu')
+                .size(1, 1)
+                .text(textToPrint)
+                .feed(2)
+                .cut()
+                .close();
+
+            console.log('Text sent to printer:', textToPrint);
+            socket.end(); // Close the socket after printing.
+        });
+
         // let printer = new ThermalPrinter({
         //   type: PrinterTypes.EPSON,
         //   interface: 'tcp://192.168.177.128:9100',
@@ -110,19 +134,19 @@ const server = http.createServer(async (req, res) => {
         // await printer.printImage('./POS_printer_server/image3.png');  // Print PNG image
         // await printer.execute();
 
-        try {
-          // Replace with your printer's IP address and image path
-          await printImageToNetworkPrinter(
-            // '192.168.177.90', 
-            '192.168.1.70',
-            9100, 
-            // './POS_printer_server/image3.png',
-            imagePath
-          );
-          console.log('Print job submitted successfully');
-        } catch (error) {
-          console.error('Failed to print:', error);
-        }
+        // try {
+        //   // Replace with your printer's IP address and image path
+        //   await printImageToNetworkPrinter(
+        //     // '192.168.177.90', 
+        //     '192.168.1.70',
+        //     9100, 
+        //     // './POS_printer_server/image3.png',
+        //     imagePath
+        //   );
+        //   console.log('Print job submitted successfully');
+        // } catch (error) {
+        //   console.error('Failed to print:', error);
+        // }
 
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Printed successfully');
