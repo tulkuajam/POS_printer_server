@@ -40,9 +40,9 @@ const server = http.createServer(async (req, res) => {
     req.on('end', async () => {
       try {
         const data = JSON.parse(body);
-        const message = data.message;
+        const textToPrint = data.message;
         const imagePath=data.imagePath;
-        console.log(message,imagePath)
+        console.log(textToPrint,imagePath)
 
         let PRINTER_IP='192.168.1.70'
         let PRINTER_PORT=9100
