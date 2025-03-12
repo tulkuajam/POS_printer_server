@@ -57,10 +57,10 @@ const server = http.createServer(async (req, res) => {
             }
 
             printer
-                .font('a')
+                // .font('a')
                 .align('ct')
-                .style('bu')
-                .size(1, 1)
+                // .style('bu')
+                // .size(1, 1)
                 .text(textToPrint)
                 .feed(2)
                 .cut()
