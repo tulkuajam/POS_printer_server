@@ -114,7 +114,7 @@ const server = http.createServer(async (req, res) => {
           // Replace with your printer's IP address and image path
           await printImageToNetworkPrinter(
             // '192.168.177.90', 
-            '192.168.1.88',
+            '192.168.1.70',
             9100, 
             // './POS_printer_server/image3.png',
             imagePath
