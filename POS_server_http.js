@@ -172,41 +172,66 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
         }
 
         console.log('Connected to printer. Loading image...');
-        
-        try{
-        // Load the image (works with PNG or JPG)
-        escpos.Image.load(imagePath, function(image) {
-          console.log('Image loaded. Sending to printer...');
-          
+
+        device.open(function(error){
           printer
-            .align('ct')         // Center align the image
-            .image(image, density) // Print with specified density
-            .then(() => {
-              console.log('Image sent to printer. Finishing...');
+          .font('a')
+          .align('ct')
+          .style('bu')
+          .size(1, 1)
+          .text('The quick brown fox jumps over the lazy dog')
+          .text('敏捷的棕色狐狸跳过懒狗')
+          .barcode('1234567', 'EAN8')
+          .table(["One", "Two", "Three"])
+          .tableCustom(
+            [
+              { text:"Left", align:"LEFT", width:0.33, style: 'B' },
+              { text:"Center", align:"CENTER", width:0.33},
+              { text:"Right", align:"RIGHT", width:0.33 }
+            ],
+            { encoding: 'cp857', size: [1, 1] } // Optional
+          )
+          .qrimage('https://github.com/song940/node-escpos', function(err){
+            this.cut();
+            this.close();
+          });
+        });
+
+        
+      //   try{
+      //   // Load the image (works with PNG or JPG)
+      //   escpos.Image.load(imagePath, function(image) {
+      //     console.log('Image loaded. Sending to printer...');
+          
+      //     printer
+      //       .align('ct')         // Center align the image
+      //       .image(image, density) // Print with specified density
+      //       .then(() => {
+      //         console.log('Image sent to printer. Finishing...');
               
-              printer
-                .cut()           // Cut the paper
-                .close();        // Close the connection
+      //         printer
+      //           .cut()           // Cut the paper
+      //           .close();        // Close the connection
               
-              console.log('Print job completed successfully.');
-              resolve('Print completed');
-            })
-            .catch(error => {
-              console.error('Error printing image:', error);
-              printer.close();
-              reject(error);
-            });
-        })
-        // .catch(error => {
-        //   console.error('Error loading image:', error);
-        //   device.close();
-        //   reject(error);
-        // });
-      }catch(error){
-        console.error('Error loading image:', error);
-        device.close();
-        reject(error);
-      } 
+      //         console.log('Print job completed successfully.');
+      //         resolve('Print completed');
+      //       })
+      //       .catch(error => {
+      //         console.error('Error printing image:', error);
+      //         printer.close();
+      //         reject(error);
+      //       });
+      //   })
+      //   // .catch(error => {
+      //   //   console.error('Error loading image:', error);
+      //   //   device.close();
+      //   //   reject(error);
+      //   // });
+      // }catch(error){
+      //   console.error('Error loading image:', error);
+      //   device.close();
+      //   reject(error);
+      // } 
       });
     } catch (error) {
       console.error('Unexpected error:', error);
