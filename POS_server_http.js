@@ -169,6 +169,7 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
 
         console.log('Connected to printer. Loading image...');
         
+        try{
         // Load the image (works with PNG or JPG)
         escpos.Image.load(imagePath, function(image) {
           console.log('Image loaded. Sending to printer...');
@@ -192,11 +193,16 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
               reject(error);
             });
         })
-        .catch(error => {
-          console.error('Error loading image:', error);
-          device.close();
-          reject(error);
-        });
+        // .catch(error => {
+        //   console.error('Error loading image:', error);
+        //   device.close();
+        //   reject(error);
+        // });
+      }catch(error){
+        console.error('Error loading image:', error);
+        device.close();
+        reject(error);
+      } 
       });
     } catch (error) {
       console.error('Unexpected error:', error);
