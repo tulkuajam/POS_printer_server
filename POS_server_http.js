@@ -176,7 +176,7 @@ function printImageToNetworkPrinter(printerIP, port, imagePath, density = 'd24')
           
           printer
             .align('ct')         // Center align the image
-            .image(image, density) // Print with specified density
+            // .image(image, density) // Print with specified density
             .then(() => {
               console.log('Image sent to printer. Finishing...');
               
