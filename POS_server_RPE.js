@@ -1,4 +1,5 @@
 const escpos = require('escpos');
+escpos.Network = require('escpos-network');
 const { ReceiptPrinterEncoder } = require('escpos');
 
 const PRINTER_IP = "192.168.177.128"; // Change this to your printer's IP
