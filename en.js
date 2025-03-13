@@ -65,7 +65,8 @@ div {
 // Printer
 const printer = {
     // "host": "127.0.0.1",
-    "host": "192.168.177.128",
+    // "host": "192.168.177.128",
+    "host": "192.168.1.70",
     "port": 9100,
     "cpl": 42,
     "encoding": "multilingual",
