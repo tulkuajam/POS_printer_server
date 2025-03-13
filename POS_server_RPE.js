@@ -2,6 +2,8 @@ const escpos = require('escpos');
 escpos.Network = require('escpos-network');
 // const { ReceiptPrinterEncoder } = require('escpos');
 const { ReceiptPrinterEncoder } = require('receiptline');
+const { ReceiptPrinterEncoder } = require('worker_threads');
+console.log(ReceiptPrinterEncoder)
 
 
 const PRINTER_IP = "192.168.177.128"; // Change this to your printer's IP
