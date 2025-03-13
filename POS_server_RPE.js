@@ -1,6 +1,8 @@
 const escpos = require('escpos');
 escpos.Network = require('escpos-network');
-const { ReceiptPrinterEncoder } = require('escpos');
+// const { ReceiptPrinterEncoder } = require('escpos');
+const { ReceiptPrinterEncoder } = require('receiptline');
+
 
 const PRINTER_IP = "192.168.177.128"; // Change this to your printer's IP
 const PRINTER_PORT = 9100; // Most ESC/POS network printers use port 9100
